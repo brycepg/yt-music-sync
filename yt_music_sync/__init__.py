@@ -130,7 +130,8 @@ def yield_missing_files(entry_list):
     """
     for elem in entry_list:
         path = "{name}.{ext}".format(name=elem['title'], ext='mp3')
-        if not os.path.exists(path):
+        norm_path = path.replace('"', "'").replace("/", "_").replace(":", " -").replace("|", "_")
+        if not os.path.exists(norm_path):
             yield elem
         else:
             log.debug("'%s' already exists", elem['title'])
